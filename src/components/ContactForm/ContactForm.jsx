@@ -1,4 +1,4 @@
-import { Component } from 'react';
+// import { useState } from 'react';
 import PropTypes from 'prop-types';
 import * as yup from 'yup';
 import { Formik, ErrorMessage  } from 'formik';
@@ -26,34 +26,22 @@ let schema = yup.object().shape({
         .required()  
 });
 
-export class ContactForm extends Component {
-    state = {
-        name: '',
-        number: ''
-    }
+export const ContactForm = ({ onSubmit }) => {
 
-
-    handleSubmit = (values, active) => {
-        this.setState({
+    const handleSubmit = (values, active) => {
+        onSubmit({
             name: values.name,
             number: values.number,
             id: nanoid(3),
-        }, () => this.props.onSubmit({
-                name: this.state.name,
-                number: this.state.number,
-                id: this.state.id,
-            }))         
-        
+        })
         active.resetForm();
     }    
-
-
-    render() {
+    
         return (
             <Formik
                 initialValues={initialValues}
                 validationSchema={schema}
-                onSubmit={this.handleSubmit}
+                onSubmit={handleSubmit}
             >                   
                 <FormStyled>
                     <Label htmlFor="name">
@@ -77,7 +65,6 @@ export class ContactForm extends Component {
             </Formik>
         );
     }
-}
 
 ContactForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
