@@ -1,14 +1,18 @@
+import { useDispatch } from "react-redux";
+import { deleteContact } from "redux/contactsSlice";
 import { ListItem } from "./Contacts.styled";
 
-export const Contacts = ({ contactsArray, deliteContact }) => {
+export const Contacts = ({contact}) => {
+    const dispatch = useDispatch();
+    
+    const handleClick = () => {
+        dispatch(deleteContact(contact.id));
+    }
+
     return (
-        <>
-            {contactsArray.map((item) => {
-                return <ListItem key={item.id}>
-                        {item.name}: {item.number}
-                        <button id={item.id} type="button" onClick={deliteContact}>Delete</button>                    
-                    </ListItem>                
-            })}            
-        </>
+        <ListItem>
+            {contact.name}: {contact.number}
+            <button type="button" onClick={handleClick}>Delete</button>                    
+        </ListItem>                
     );
 }
