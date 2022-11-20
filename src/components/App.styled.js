@@ -13,9 +13,11 @@ export const Wrapper = styled.div`
 
     h1 {
         text-align: center;
+        margin-top: 0;
     }
 
     h2 {
         text-align: center;
+        margin-top: 0;
     }
 `;

@@ -1,6 +1,6 @@
 import { Contacts } from "components/Contacts/Contacts";
 import { useSelector } from "react-redux";
-import { ContactList } from './ContactsList.styled';
+import { ContactList, FailMessage } from './ContactsList.styled';
 
 export const ContactsList = () => {
 
@@ -8,14 +8,17 @@ export const ContactsList = () => {
     const filter = useSelector(state => state.filter);
     const filteredContacts = contacts.filter((contact) => {
         const name = contact.name.toLowerCase();
-            return name.includes(filter.trim());
-        })
-    
+        return name.includes(filter.trim());
+    })
+
     return (
         <ContactList>
-                {filteredContacts.map((contact) => {
+            {filteredContacts.length
+                ? filteredContacts.map((contact) => {
                     return <Contacts contact={contact} key={contact.id} />
-                })}
-            </ContactList>
+                })
+                : <FailMessage><span>{filter}</span> not found</FailMessage>
+            }
+        </ContactList>
     );
 }
