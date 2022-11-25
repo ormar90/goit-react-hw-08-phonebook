@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import ClipLoader from "react-spinners/ClipLoader";
+
 import { Form, Field } from 'formik';
 
 
@@ -27,12 +29,24 @@ export const Message = styled.div`
 `;
 
 export const Button = styled.button`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     margin: 0 auto;
+    height: 45px;
     border-radius: 10px; 
     width: 50%;
     padding: 8px;
+`;
 
+export const Spiner = styled(ClipLoader)`
+    position: absolute;
+    right: 20px;
+    color: #2A2E35;
+    max-width: 16px;
+    max-height: 16px;   
 `;
 
 

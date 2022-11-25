@@ -1,9 +1,10 @@
 import * as yup from 'yup';
 import { Formik, ErrorMessage } from 'formik';
-import { Button, FieldStyled, FormStyled, Label, Message } from './ContactForm.styled';
+import { Button, FieldStyled, FormStyled, Label, Message, Spiner } from './ContactForm.styled';
+import { getContacts, getError, getIsLoading } from 'redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import { addContacts } from 'redux/operations';
+import { Report } from 'notiflix';
 
 const initialValues = {
     name: '',
@@ -26,8 +27,11 @@ let schema = yup.object().shape({
 });
 
 export const ContactForm = () => {
-    const contacts = useSelector(state => state.contacts);
+    const contacts = useSelector(getContacts);
+    const isLoading = useSelector(getIsLoading);
+    const error = useSelector(getError);
     const dispatch = useDispatch();
+
     const isSameContact = (queryName) => {
         return contacts.find((contact) => {
             return contact.name.toLowerCase().trim() === queryName.toLowerCase().trim();
@@ -36,7 +40,7 @@ export const ContactForm = () => {
 
     const handleSubmit = (values, active) => {
         if (!isSameContact(values.name)) {
-            dispatch(addContact(values));
+            dispatch(addContacts(values));
         } else {
             Report.failure(
                 `${values.name} is already in contacts.`,
@@ -70,7 +74,12 @@ export const ContactForm = () => {
                     />
                     <ErrorMessage name="number" component={Message} />
                 </Label>
-                <Button type="submit">Add contact</Button>
+                <Button type="submit">
+                    <span>
+                        Add contact
+                    </span>
+                    {isLoading && !error && <Spiner />}
+                </Button>
             </FormStyled>
         </Formik>
     );
