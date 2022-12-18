@@ -14,6 +14,6 @@ export const UserMenuWrap = styled.div`
 export const Button = styled.button`
     cursor: pointer;
     border-radius: 10px; 
-    width: 20%;
+    /* width: 20%; */
     padding: 8px;
 `;
