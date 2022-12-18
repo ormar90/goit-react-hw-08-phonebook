@@ -1,9 +1,9 @@
 import * as yup from 'yup';
 import { Formik, ErrorMessage } from 'formik';
 import { Button, FieldStyled, FormStyled, Label, Message, Spiner } from './ContactForm.styled';
-import { getContacts, getError, getIsLoading } from 'redux/selectors';
+import { selectContacts, selectError, selectIsLoading } from 'redux/Contacts/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContacts } from 'redux/operations';
+import { addContacts } from 'redux/Contacts/operations';
 import { Report } from 'notiflix';
 
 const initialValues = {
@@ -27,9 +27,9 @@ let schema = yup.object().shape({
 });
 
 export const ContactForm = () => {
-    const contacts = useSelector(getContacts);
-    const isLoading = useSelector(getIsLoading);
-    const error = useSelector(getError);
+    const contacts = useSelector(selectContacts);
+    const isLoading = useSelector(selectIsLoading);
+    const error = useSelector(selectError);
     const dispatch = useDispatch();
 
     const isSameContact = (queryName) => {
