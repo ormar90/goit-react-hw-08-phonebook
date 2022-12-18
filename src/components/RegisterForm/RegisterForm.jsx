@@ -14,14 +14,11 @@ const initialValues = {
 let schema = yup.object().shape({
     name: yup
         .string()
-        .matches(
-            /^([A-Za-z0-9\-\@\#\№\&\\\/\ ])*$/,
-            "Allowed A-Z a-z hyphen(-) and numbers 0-9, special symbols (@,#,№,&,\,/), without spaces before and after")
         .required(),
     email: yup
         .string()
         .matches(
-            /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             "Please insert a valid email address.")
         .required(),
     password: yup

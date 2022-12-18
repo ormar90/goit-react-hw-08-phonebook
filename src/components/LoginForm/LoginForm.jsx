@@ -14,7 +14,7 @@ let schema = yup.object().shape({
     email: yup
         .string()
         .matches(
-            /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             "Please insert a valid email address.")
         .required(),
     password: yup
