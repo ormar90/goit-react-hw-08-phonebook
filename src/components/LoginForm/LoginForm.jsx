@@ -13,16 +13,9 @@ const initialValues = {
 let schema = yup.object().shape({    
     email: yup
         .string()
-        // .matches(
-        //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        //     "Please insert a valid email address.")
-  // .required()
   ,
     password: yup
         .string()
-        // .matches(
-        //     /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-        //     "Password must be minimum eight characters, at least one letter and one number:")
         .required()
 });
 
